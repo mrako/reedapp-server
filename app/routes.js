@@ -27,10 +27,9 @@ module.exports = function(app) {
 
   // CREATE =====================================================================
   app.post('/api/reeds', function(req, res) {
-    Reed.create({
-      text   : req.body.text,
-      done   : false
-    }, function(err) {
+    console.log(req.body);
+
+    Reed.create(req.body, function(err) {
       if (err) {
         res.send(err);
       }
@@ -50,10 +49,7 @@ module.exports = function(app) {
   app.put('/api/reeds/:reedId', function(req, res) {
     Reed.update({
       _id: req.params.reedId
-    },{
-      text   : req.body.text,
-      done   : req.body.done
-    }, function(err) {
+    }, req.body, function(err) {
       if (err) {
         res.send(err);
       }

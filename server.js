@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var cors = require('./app/cors');
 
 var app      = express();
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT || 8888;
 var database = require('./db/database');
 
 // CONFIGURATION ===============================================================
