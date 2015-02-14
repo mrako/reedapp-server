@@ -11,7 +11,6 @@ var BearerStrategy = require('passport-http-bearer').Strategy;
 module.exports = function(app) {
 
   passport.use(new BearerStrategy(function(token, done) {
-      console.log("tomme");
       User.findOne({ token: token }, function (err, user) {
         if (err) { return done(err); }
         if (!user) { return done(null, false); }
@@ -87,9 +86,9 @@ module.exports = function(app) {
 
   // GET ALL ====================================================================
   app.get('/api/reeds', passport.authenticate('bearer', { session: false }), function(req, res) {
-    console.log("loading reeds");
-
-    Reed.find(function(err, reeds) {
+    Reed.find({
+      user: req.user
+    }, function(err, reeds) {
       if (err) {
         res.sendStatus(err);
       }
@@ -100,7 +99,10 @@ module.exports = function(app) {
 
   // FIND BY ID =================================================================
   app.get('/api/reeds/:reedId', passport.authenticate('bearer', { session: false }), function(req, res) {
-    Reed.findById(req.params.reedId, function(err, reed) {
+    Reed.findOne({
+      _id: req.params.reedId,
+      user: req.user
+    }, function(err, reed) {
       if (err) {
         res.sendStatus(err);
       }
@@ -113,7 +115,10 @@ module.exports = function(app) {
   app.post('/api/reeds', passport.authenticate('bearer', { session: false }), function(req, res) {
     console.log(req.body);
 
-    Reed.create(req.body, function(err) {
+    var reed = new Reed(req.body);
+    reed.user = req.user;
+
+    reed.save(function(err) {
       if (err) {
         res.sendStatus(err);
       }
@@ -132,7 +137,8 @@ module.exports = function(app) {
   // UPDATE =====================================================================
   app.put('/api/reeds/:reedId', passport.authenticate('bearer', { session: false }), function(req, res) {
     Reed.update({
-      _id: req.params.reedId
+      _id: req.params.reedId,
+      user: req.user
     }, req.body, function(err) {
       if (err) {
         res.sendStatus(err);
@@ -151,7 +157,8 @@ module.exports = function(app) {
   // DELETE =====================================================================
   app.delete('/api/reeds/:reedId', passport.authenticate('bearer', { session: false }), function(req, res) {
     Reed.remove({
-      _id: req.params.reedId
+      _id: req.params.reedId,
+      user: req.user
     }, function(err) {
       if (err) {
         res.sendStatus(err);
