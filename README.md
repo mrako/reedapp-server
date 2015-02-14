@@ -23,3 +23,14 @@ Add a change to show remotes
 3. Install components: `bower install`
 4. (skip if you have mongo running as a service) Start db: `mongod --dbpath db/data`
 5. Start server: `grunt server`
+
+## Testing
+
+    curl --data "email=mrako@me.com&password=kivikunu" http://127.0.0.1:8888/signin
+
+    curl --data "email=mrako@me.com&password=kivikunu" http://127.0.0.1:8888/authenticate
+
+## Deploying
+
+    heroku config:set JWT_SECRET=<your secret token>
+    git push heroku master

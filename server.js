@@ -1,14 +1,16 @@
 // SETUP =======================================================================
-var express  = require('express');
+var express    = require('express');
 var bodyParser = require('body-parser');
-var morgan  = require('morgan');
-var mongoose = require('mongoose');
+var morgan     = require('morgan');
+var mongoose   = require('mongoose');
+var passport = require('passport');
 
-var cors = require('./app/cors');
+var cors       = require('./app/cors');
 
-var app      = express();
-var port     = process.env.PORT || 8888;
-var database = require('./db/database');
+var app        = express();
+var port       = process.env.PORT || 8888;
+var database   = require('./db/database');
+
 
 // CONFIGURATION ===============================================================
 mongoose.connect(database.url);
@@ -17,6 +19,7 @@ mongoose.connect(database.url);
 
 app.use(cors);
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(morgan('dev', {format: 'dev', immediate: true}));
 
 // ROUTES ======================================================================

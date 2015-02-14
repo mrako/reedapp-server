@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Reed', {
+  user: {type : mongoose.Schema.ObjectId, ref : 'User'},
   code: String,
   instrument: String,
   color: String,

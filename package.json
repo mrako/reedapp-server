@@ -1,34 +1,41 @@
 {
-  "name"         : "reedapp-server",
-  "version"      : "0.0.0",
-  "description"  : "backend for reedapp",
-  "homepage"     : "",
-  "author"       : {
+  "name": "reedapp-server",
+  "version": "0.0.0",
+  "description": "backend for reedapp",
+  "homepage": "",
+  "author": {
     "name": "",
     "email": ""
   },
-  "repository"   : {
+  "repository": {
     "type": "git",
     "url": ""
   },
-  "main"         : "server.js",
-  "dependencies" : {
-    "express"    : "latest",
+  "main": "server.js",
+  "dependencies": {
     "body-parser": "latest",
+    "express": "latest",
+    "express-jwt": "^1.0.0",
+    "jsonwebtoken": "^3.2.2",
+    "mongoose": "latest",
     "morgan": "latest",
-    "mongoose"   : "latest"
+    "passport": "^0.2.1",
+    "passport-http-bearer": "^1.0.1",
+    "passport-token-auth": "^0.1.2"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "grunt": "latest",
     "grunt-express-server": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-contrib-jshint": "latest",
     "grunt-open": "latest",
-
     "karma": "latest",
     "grunt-karma": "latest",
     "karma-spec-reporter": "latest",
     "karma-jasmine": "latest",
     "karma-phantomjs-launcher": "latest"
+  },
+  "engines": {
+    "node": ">=0.10.0"
   }
 }
