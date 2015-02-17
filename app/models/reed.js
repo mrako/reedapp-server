@@ -14,7 +14,7 @@ module.exports = mongoose.model('Reed', {
   cane: {
     name: String,
     gouge: Number,
-    shape: Number,
+    shape: String,
     diameter: Number,
     hardness: Number,
     density: Number,
